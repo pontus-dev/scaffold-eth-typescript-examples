@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
+window.React = React;
 import '~~/styles/main-page.css';
 
 import { GenericContract } from 'eth-components/ant/generic-contract';
@@ -11,6 +11,7 @@ import { asEthersAdaptor } from 'eth-hooks/functions';
 
 import { MainPageMenu, MainPageContracts, MainPageFooter, MainPageHeader } from './components/main';
 import { useScaffoldHooksExamples as useScaffoldHooksExamples } from './components/main/hooks/useScaffoldHooksExamples';
+import { UnityComponent } from './components/unity/UnityComponent';
 
 import { useBurnerFallback } from '~~/components/main/hooks/useBurnerFallback';
 import { useScaffoldProviders as useScaffoldAppProviders } from '~~/components/main/hooks/useScaffoldAppProviders';
@@ -125,6 +126,9 @@ export const Main: FC = () => {
               yourCurrentBalance={yourCurrentBalance}
               price={ethPrice}
             />
+          </Route>
+          <Route path="/unity">
+            <UnityComponent />
           </Route>
           <Route path="/mainnetdai">
             {MAINNET_PROVIDER != null && (

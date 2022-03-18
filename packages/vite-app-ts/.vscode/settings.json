@@ -8,7 +8,6 @@
     "**/Thumbs.db": true,
     "**/.cache": true,
     "**/.vs/": true,
-    "**/*.cs": true,
     "**/*.orig": true,
     "**/bin/": true,
     "**/build/": true,

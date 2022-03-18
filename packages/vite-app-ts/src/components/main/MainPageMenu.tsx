@@ -41,6 +41,15 @@ export const MainPageMenu: FC<IMainPageMenuProps> = (props) => (
         ExampleUI
       </Link>
     </Menu.Item>
+    <Menu.Item key="/unity">
+      <Link
+        onClick={(): void => {
+          props.setRoute('/unity');
+        }}
+        to="/unity">
+        Unity
+      </Link>
+    </Menu.Item>
     <Menu.Item key="/mainnetdai">
       <Link
         onClick={(): void => {

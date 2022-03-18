@@ -37,7 +37,7 @@ packages/hardhat-ts/cache
 coverage
 
 # production
-build
+/build
 dist
 
 #Hardhat files
