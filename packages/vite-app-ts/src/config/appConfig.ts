@@ -47,6 +47,9 @@ if (DEBUG)
 
 export const SUBGRAPH_URI = 'http://localhost:8000/subgraphs/name/scaffold-eth/your-contract';
 
+export const MORALIS_APP_ID = import.meta.env.VITE_MORALIS_APP_ID;
+export const MORALIS_SERVER_URL = import.meta.env.VITE_MORALIS_SERVER_URL;
+
 /** ******************************
  * OTHER FILES
  ****************************** */

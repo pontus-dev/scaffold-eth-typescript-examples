@@ -73,9 +73,9 @@ export const UnityComponent: FC = () => {
     };
   }, [tx]);
 
-  // When the balance is updated, it will be sent to Unity.
+  // When the NFTdata is updated, it will be sent to Unity.
   useEffect(() => {
-    unityContext.send('ReactHooks', 'SetBalance', status === 'success' ? formatEther(balance) : 'loading');
+    unityContext.send('ReactHooks', 'SetNFTs', status === 'success' ? formatEther(balance) : 'loading');
   }, [balance, isLoaded, status]);
 
   // This is the React component that will be rendering the Unity app.

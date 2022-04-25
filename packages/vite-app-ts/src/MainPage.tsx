@@ -121,11 +121,7 @@ export const Main: FC = () => {
             />
           </Route>
           <Route path="/exampleui">
-            <ExampleUI
-              mainnetProvider={scaffoldAppProviders.mainnetAdaptor?.provider}
-              yourCurrentBalance={yourCurrentBalance}
-              price={ethPrice}
-            />
+            <ExampleUI mainnetProvider={scaffoldAppProviders.mainnetAdaptor?.provider} />
           </Route>
           <Route path="/unity">
             <UnityComponent />
