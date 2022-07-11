@@ -3,17 +3,16 @@
 import { SyncOutlined } from '@ant-design/icons';
 import { StaticJsonRpcProvider } from '@ethersproject/providers';
 import { formatEther, parseEther } from '@ethersproject/units';
-import { Button, Card, DatePicker, Divider, Input, List, Progress, Slider, Spin, Switch } from 'antd';
+import { Button, Card, DatePicker, Divider, Input, Progress, Slider, Spin, Switch } from 'antd';
 import { Address, Balance } from 'eth-components/ant';
 import { transactor } from 'eth-components/functions';
 import { EthComponentsSettingsContext } from 'eth-components/models';
-import { useContractReader, useEventListener, useGasPrice } from 'eth-hooks';
+import { useGasPrice } from 'eth-hooks';
 import { useEthersContext } from 'eth-hooks/context';
 import { BigNumber } from 'ethers';
-import React, { useState, FC, useContext, ReactNode } from 'react';
+import React, { useState, FC, useContext } from 'react';
 
 import { useAppContracts } from '~~/config/contractContext';
-import { SetPurposeEvent } from '~~/generated/contract-types/YourContract';
 
 export interface IExampleUIProps {
   mainnetProvider: StaticJsonRpcProvider | undefined;
@@ -25,10 +24,7 @@ export const ExampleUI: FC<IExampleUIProps> = (props) => {
   const [newPurpose, setNewPurpose] = useState('loading...');
   const ethersContext = useEthersContext();
 
-  const yourContract = useAppContracts('YourContract', ethersContext.chainId);
-  const [purpose] = useContractReader(yourContract, yourContract?.purpose, [], yourContract?.filters.SetPurpose());
-
-  const [setPurposeEvents] = useEventListener<SetPurposeEvent>(yourContract, yourContract?.filters.SetPurpose(), 1);
+  const yourContract = useAppContracts('YourCollectible', ethersContext.chainId);
 
   const signer = ethersContext.signer;
   const address = ethersContext.account ?? '';
@@ -46,7 +42,7 @@ export const ExampleUI: FC<IExampleUIProps> = (props) => {
       */}
       <div style={{ border: '1px solid #cccccc', padding: 16, width: 400, margin: 'auto', marginTop: 64 }}>
         <h2>Example UI:</h2>
-        <h4>purpose: {purpose}</h4>
+        {/* <h4>purpose: {purpose}</h4>*/}
         <Divider />
         <div style={{ margin: 8 }}>
           <Input
@@ -166,7 +162,7 @@ export const ExampleUI: FC<IExampleUIProps> = (props) => {
       */}
       <div style={{ width: 600, margin: 'auto', marginTop: 32, paddingBottom: 32 }}>
         <h2>Events:</h2>
-        <List
+        {/* <List
           bordered
           dataSource={setPurposeEvents}
           renderItem={(item: any): ReactNode => {
@@ -177,7 +173,7 @@ export const ExampleUI: FC<IExampleUIProps> = (props) => {
               </List.Item>
             );
           }}
-        />
+        />*/}
       </div>
 
       <div style={{ width: 600, margin: 'auto', marginTop: 32, paddingBottom: 256 }}>
