@@ -12,8 +12,6 @@ import GraphiQL from 'graphiql';
 import React, { FC, ReactElement, useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 
-import { useAppContracts } from '~~/config/contractContext';
-
 // const GraphiQL = lazy(() => import('graphiql'));
 
 const highlight: React.CSSProperties = {
@@ -43,7 +41,7 @@ export const Subgraph: FC<ISubgraphProps> = (props) => {
   const ethersContext = useEthersContext();
   const [gasPrice] = useGasPrice(ethersContext.chainId, 'fast');
   const tx = transactor(ethComponentsSettings, ethersContext?.signer, gasPrice);
-  const yourContract = useAppContracts('YourContract', ethersContext.chainId);
+  // const yourContract = useAppContracts('YourContract', ethersContext.chainId);
 
   const EXAMPLE_GQL = `
     {
@@ -185,7 +183,7 @@ export const Subgraph: FC<ISubgraphProps> = (props) => {
             onClick={(): void => {
               console.log('newPurpose', newPurpose);
               /* look how you call setPurpose on your contract: */
-              void tx?.(yourContract?.setPurpose(newPurpose));
+              // void tx?.(yourContract?.setPurpose(newPurpose));
             }}>
             Set Purpose
           </Button>
