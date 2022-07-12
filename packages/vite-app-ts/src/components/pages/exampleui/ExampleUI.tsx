@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import { SyncOutlined } from '@ant-design/icons';
 import { StaticJsonRpcProvider } from '@ethersproject/providers';
 import { formatEther, parseEther } from '@ethersproject/units';
@@ -55,23 +53,6 @@ export const ExampleUI: FC<IExampleUIProps> = (props) => {
             onClick={async (): Promise<void> => {
               /* look how you call setPurpose on your contract: */
               /* notice how you pass a call back for tx updates too */
-              const result = tx?.(yourContract?.setPurpose(newPurpose), (update: any) => {
-                console.log('📡 Transaction Update:', update);
-                if (update && (update.status === 'confirmed' || update.status === 1)) {
-                  console.log(' 🍾 Transaction ' + update.hash + ' finished!');
-                  console.log(
-                    ' ⛽️ ' +
-                      update.gasUsed +
-                      '/' +
-                      (update.gasLimit || update.gas) +
-                      ' @ ' +
-                      parseFloat(update.gasPrice) / 1000000000 +
-                      ' gwei'
-                  );
-                }
-              });
-              console.log('awaiting metamask/web3 confirm result...', result);
-              console.log(await result);
             }}>
             Set Purpose!
           </Button>
@@ -105,7 +86,6 @@ export const ExampleUI: FC<IExampleUIProps> = (props) => {
           <Button
             onClick={(): void => {
               /* look how you call setPurpose on your contract: */
-              void tx?.(yourContract?.setPurpose('🍻 Cheers'));
             }}>
             Set Purpose to &quot;🍻 Cheers&quot;
           </Button>
@@ -130,11 +110,6 @@ export const ExampleUI: FC<IExampleUIProps> = (props) => {
           <Button
             onClick={(): void => {
               /* look how we call setPurpose AND send some value along */
-              void tx?.(
-                yourContract?.setPurpose('💵 Paying for this one!', {
-                  value: parseEther('0.001'),
-                })
-              );
               /* this will fail until you make the setPurpose function payable */
             }}>
             Set Purpose With Value
@@ -144,11 +119,6 @@ export const ExampleUI: FC<IExampleUIProps> = (props) => {
           <Button
             onClick={(): void => {
               /* you can also just craft a transaction and send it to the tx() transactor */
-              void tx?.({
-                to: yourContract?.address,
-                value: parseEther('0.001'),
-                data: yourContract?.interface?.encodeFunctionData?.('setPurpose', ['🤓 Whoa so 1337!']),
-              });
               /* this should throw an error about "no fallback nor receive function" until you add it */
             }}>
             Another Example

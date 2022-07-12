@@ -1,5 +1,5 @@
 ﻿mergeInto(LibraryManager.library, {
-  SetPurpose: function (message) {
-    dispatchReactUnityEvent("SetPurpose", Pointer_stringify(message));
+  SetCollectibles: function (jsonData) {
+    dispatchReactUnityEvent("SetCollectibles", Pointer_stringify(jsonData));
   }
 });

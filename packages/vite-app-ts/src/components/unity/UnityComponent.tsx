@@ -1,17 +1,15 @@
+import axios from 'axios';
 import { transactor } from 'eth-components/functions';
 import { EthComponentsSettingsContext } from 'eth-components/models';
 import { useContractReader, useGasPrice } from 'eth-hooks';
 import { useEthersContext } from 'eth-hooks/context';
 import { BigNumber } from 'ethers';
-import { create } from 'ipfs-http-client';
 import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import Unity, { UnityContext } from 'react-unity-webgl';
-import { concat } from 'uint8arrays';
 
 import { useAppContracts } from '~~/config/contractContext';
 import { getNetworkInfo } from '~~/functions';
 
-const ipfs = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 // This is the context that Unity will use to communicate with the React app.
 const unityContext = new UnityContext({
   productName: 'scaffold-eth-unity-webgl',
@@ -28,19 +26,6 @@ const unityContext = new UnityContext({
     preserveDrawingBuffer: true,
   },
 });
-
-// helper function to "Get" from IPFS
-// you usually go content.toString() after this...
-const getFromIPFS = async (hashToGet: string): Promise<string> => {
-  const chunks = [];
-  for await (const chunk of ipfs.cat(hashToGet)) {
-    chunks.push(chunk);
-  }
-
-  const data = concat(chunks);
-  const decodedData = new TextDecoder().decode(data).toString();
-  return decodedData;
-};
 
 // This is the React component that will be rendering the Unity app.
 export const UnityComponent: FC = () => {
@@ -76,10 +61,9 @@ export const UnityComponent: FC = () => {
           const ipfsHash = tokenURI?.replace('https://ipfs.io/ipfs/', '');
           console.log('ipfsHash', ipfsHash);
 
-          const jsonManifestBuffer = await getFromIPFS(ipfsHash ?? '');
-
+          const { data } = await axios.get<string>(`https://${ipfsHash}.ipfs.infura-ipfs.io`);
           try {
-            const jsonManifest = JSON.parse(jsonManifestBuffer);
+            const jsonManifest = JSON.parse(data);
             console.log('jsonManifest', jsonManifest);
             collectibleUpdate.push(JSON.stringify({ id: tokenId, uri: tokenURI, owner: address, ...jsonManifest }));
           } catch (e) {

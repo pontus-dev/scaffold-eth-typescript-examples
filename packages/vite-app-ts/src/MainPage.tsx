@@ -9,7 +9,7 @@ import { useEthersContext } from 'eth-hooks/context';
 import { useDexEthPrice } from 'eth-hooks/dapps';
 import { asEthersAdaptor } from 'eth-hooks/functions';
 
-import { MainPageMenu, MainPageContracts, MainPageFooter, MainPageHeader } from './components/main';
+import { MainPageMenu, MainPageFooter, MainPageHeader } from './components/main';
 import { useScaffoldHooksExamples as useScaffoldHooksExamples } from './components/main/hooks/useScaffoldHooksExamples';
 import { UnityComponent } from './components/unity/UnityComponent';
 
@@ -102,16 +102,6 @@ export const Main: FC = () => {
         <MainPageMenu route={route} setRoute={setRoute} />
         <Switch>
           <Route exact path="/">
-            <MainPageContracts scaffoldAppProviders={scaffoldAppProviders} />
-          </Route>
-          {/* you can add routes here like the below examlples */}
-          <Route exact path="/debug">
-            {/*
-                🎛 this scaffolding is full of commonly used components
-                this <Contract/> component will automatically parse your ABI
-                and give you a form to interact with it locally
-            */}
-
             <GenericContract
               contractName="YourCollectible"
               contract={yourCollectible}
@@ -119,6 +109,7 @@ export const Main: FC = () => {
               blockExplorer={scaffoldAppProviders.targetNetwork.blockExplorer}
             />
           </Route>
+          {/* you can add routes here like the below examlples */}
           <Route path="/hints">
             <Hints
               address={ethersContext?.account ?? ''}
